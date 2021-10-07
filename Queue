@@ -1,0 +1,137 @@
+import java.util.Scanner;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class Queue
+ {
+    static List<Integer> NumbersQ = new ArrayList<Integer>();
+    static int head = 0;
+    static int tail = 0;
+    static Lock l = new ReentrantLock();
+    public static void main(String[] args) 
+    {
+        System.out.println("This queue Stores up to 10 numbers!.");
+
+        while (true) 
+        {
+            if (!isFull())
+             {
+                System.out.println("Type 1 to Enqueue or 2 to Dequeue");
+                Scanner Input1 = new Scanner(System.in);
+                int choice = Input1.nextInt();
+                if (choice == 1)
+                 {
+                    System.out.println("Enter a number:");
+                    Scanner Input2 = new Scanner(System.in);
+                    int number = Input1.nextInt();
+                    Enqueue(number);
+                    System.out.println("Queue: " + NumbersQ);
+                } 
+                else if (choice == 2) 
+                {
+                    if (isEmpty()) 
+                    {
+                    } 
+                    else 
+                    {
+                        System.out.println("removing " + Dequeue());
+                    }
+                }
+            } 
+            else 
+            {
+                System.out.println("Put 1 to Enqueue or 2 to Dequeue!");
+                Scanner Input1 = new Scanner(System.in);
+                int choice = Input1.nextInt();
+                if (choice == 1) 
+                {
+                    if (isFull()) 
+                    {
+                    } 
+                    else 
+                    {
+                        System.out.println("Enter a number:");
+                        Scanner Input2 = new Scanner(System.in);
+                        int number = Input1.nextInt();
+                        Enqueue(number);
+                        System.out.println("Queue: " + NumbersQ);
+                    }
+                } 
+                else if (choice == 2)
+                {
+                    if (isEmpty())
+                    {
+                    System.out.println("It's Empty! ");
+                    }
+                     else 
+                    {
+                        System.out.println("removing " + Dequeue());
+                    }
+                }
+            }
+        }
+    }
+
+    public static void Enqueue(int N)
+     {
+        l.lock();
+        try 
+        {
+            NumbersQ.add(N);
+            tail = NumbersQ.size();
+        }
+         finally
+          {
+            l.unlock();
+        }
+    }
+
+    public static int Dequeue()
+     {
+        l.lock();
+        try 
+        {
+            System.out.println("Removing first number from queue");
+            int Nums = NumbersQ.get(0);
+            NumbersQ.remove(head);
+            return Nums;
+        } 
+        finally
+         {
+            l.unlock();
+        }
+    }
+
+    public static boolean isEmpty() {
+        boolean empty = NumbersQ.isEmpty();
+        if (empty == true) 
+        {
+            System.out.println("The Queue is empty");
+            return true;
+
+        }
+         else 
+        {
+            System.out.println("The Queue isn't empty");
+            return false;
+        }
+    }
+
+    public static boolean isFull() 
+    {
+        if (NumbersQ.size() == 10) 
+        {
+            System.out.println("The Queue is Full! " + NumbersQ);
+            return true;
+        } 
+        else
+        {
+            return false;
+        }
+    }
+
+  
+}
