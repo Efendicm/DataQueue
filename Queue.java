@@ -15,7 +15,8 @@ public class Queue {
         try {
             numQueue.add(Num);
             tail = numQueue.size();
-        } finally {
+        } 
+        finally {
             lock.unlock();
         }
     }
@@ -27,7 +28,8 @@ public class Queue {
             int temp = numQueue.get(0);
             numQueue.remove(head);
             return temp;
-        } finally {
+        } 
+        finally {
             lock.unlock();
         }
     }
@@ -38,7 +40,8 @@ public class Queue {
             System.out.println("Queue is empty");
             return true;
 
-        } else {
+        } 
+        else {
             System.out.println("Queue is not empty");
             return false;
         }
@@ -48,7 +51,8 @@ public class Queue {
         if (numQueue.size() == 10) {
             System.out.println("Queue is Full! -> " + numQueue);
             return true;
-        } else {
+        } 
+        else {
             return false;
         }
 
@@ -68,28 +72,34 @@ public class Queue {
                     int number = userInput.nextInt();
                     Enqueue(number);
                     System.out.println("Queue: " + numQueue);
-                } else if (choice == 2) {
+                } 
+                else if (choice == 2) {
                     if (isEmpty()) {
-                    } else {
+                    } 
+                    else {
                         System.out.println("removing " + Dequeue());
                     }
                 }
-            } else {
+            } 
+            else {
                 System.out.println("Type 1 to Enqueue or 2 to Dequeue?");
                 Scanner userInput = new Scanner(System.in);
                 int choice = userInput.nextInt();
                 if (choice == 1) {
                     if (isFull()) {
-                    } else {
+                    } 
+                    else {
                         System.out.println("Enter a number:");
                         Scanner userInput2 = new Scanner(System.in);
                         int number = userInput.nextInt();
                         Enqueue(number);
                         System.out.println("Queue: " + numQueue);
                     }
-                } else if (choice == 2) {
+                } 
+                else if (choice == 2) {
                     if (isEmpty()) {
-                    } else {
+                    } 
+                    else {
                         System.out.println("removing " + Dequeue());
                     }
                 }
